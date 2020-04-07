@@ -1,15 +1,26 @@
 main: "net.Defracted.AdminUtils.Main"
-version: "1.0.2"
+version: "1.0.3"
 name: "AdminUtils"
 author: "Defracted7"
 api-version: "1.15"
 
 
 commands:
+  adminutils:
+    description: "Управление плагином"
+    usage: "/adminutils [reload]"
+    permission: "adminutils.manage"
+
+  ban:
+    description: "Банит игроков"
+    usage: "/ban <игрок> <причина>"
+    permission: "adminutils.ban"
+
   heal:
     description: "Лечит игрока"
     usage: "/heal <игрок>"
     permission: "adminutils.heal"
+
   god:
     description: "Включает неуюзвимость"
     usage: "/god <игрок>"
@@ -17,6 +28,14 @@ commands:
 
 
 permissions:
+  adminutils.manage:
+    description: "Доступ к команде /adminutils"
+    default: op
+
+  adminutils.ban:
+    description: "Доступ к команде /ban"
+    default: op
+
   adminutils.heal:
     description: "Доступ к команде /heal"
     default: op
@@ -28,5 +47,7 @@ permissions:
   adminutils.*:
     description: "Полный доступ ко всем командам плагина AdminUtils"
     children:
+      adminutils.manage: true
+      adminutils.ban: true
       adminutils.heal: true
       adminutils.god: true
