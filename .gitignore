@@ -21,11 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.idea/AdminUtils-1.15.iml
-.idea/discord.xml
-.idea/libraries/spigot_1_15_2.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
+.idea/
 out/
-.idea/uiDesigner.xml
+
