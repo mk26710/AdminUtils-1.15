@@ -7,5 +7,14 @@ public class Formatters {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 
+    public static boolean isStrNum(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     // next method
 }

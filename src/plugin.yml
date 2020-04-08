@@ -1,5 +1,5 @@
 main: "net.Defracted.AdminUtils.Main"
-version: "1.0.3"
+version: "1.0.4"
 name: "AdminUtils"
 author: "Defracted7"
 api-version: "1.15"
@@ -13,7 +13,7 @@ commands:
 
   ban:
     description: "Банит игроков"
-    usage: "/ban <игрок> <причина>"
+    usage: "/ban <игрок> <срок в минутах> <причина>"
     permission: "adminutils.ban"
 
   heal:

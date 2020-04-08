@@ -23,7 +23,7 @@ public class BanCompleter implements TabCompleter {
             Collections.sort(completions);
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 || args.length == 3) {
             // Возвращается пустой ArrayList, т.к. зависит от ввода игрока
             return completions;
         }
