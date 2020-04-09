@@ -15,6 +15,4 @@ public class Formatters {
             return false;
         }
     }
-
-    // next method
 }

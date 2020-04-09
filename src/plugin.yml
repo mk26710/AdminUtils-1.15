@@ -1,5 +1,5 @@
 main: "net.Defracted.AdminUtils.Main"
-version: "1.0.4"
+version: "1.0.6"
 name: "AdminUtils"
 author: "Defracted7"
 api-version: "1.15"
