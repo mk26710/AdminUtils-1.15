@@ -1,12 +1,11 @@
 package net.Defracted.AdminUtils
 
-import net.Defracted.AdminUtils.commands.AdminUtils
-import net.Defracted.AdminUtils.commands.Ban
-import net.Defracted.AdminUtils.commands.God
-import net.Defracted.AdminUtils.commands.Heal
+import net.Defracted.AdminUtils.commands.*
 import net.Defracted.AdminUtils.completers.AdminUtilsCompleter
 import net.Defracted.AdminUtils.completers.BanCompleter
 import net.Defracted.AdminUtils.completers.HealAndGodCompleter
+import net.Defracted.AdminUtils.completers.NoCompletion
+import net.Defracted.AdminUtils.listeners.ChatListener
 import net.Defracted.AdminUtils.listeners.ConnectionListener
 import net.Defracted.AdminUtils.listeners.DamageListener
 import org.bukkit.Bukkit
@@ -26,7 +25,7 @@ class Main() : JavaPlugin() {
         val logger: Logger = Bukkit.getLogger()
     }
 
-    private fun loadCommand(command: String, Executor: CommandExecutor, Completer: TabCompleter) {
+    private fun loadCommand(command: String, Executor: CommandExecutor, Completer: TabCompleter?) {
         this.getCommand(command)?.setExecutor(Executor)
         this.getCommand(command)?.tabCompleter = Completer
     }
@@ -37,8 +36,12 @@ class Main() : JavaPlugin() {
 
     override fun onEnable() {
         saveDefaultConfig()
+
         loadListener(ConnectionListener(this))
         loadListener(DamageListener(this))
+        loadListener(ChatListener(this))
+
+        loadCommand("ping", Ping(), NoCompletion())
         loadCommand("heal", Heal(), HealAndGodCompleter())
         loadCommand("god", God(this), HealAndGodCompleter())
         loadCommand("ban", Ban(this), BanCompleter())

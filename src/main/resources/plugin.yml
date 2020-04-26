@@ -26,6 +26,9 @@ commands:
     usage: "/god <игрок>"
     permission: "adminutils.god"
 
+  ping:
+    description: "Проверяет задержку"
+    usage: "/ping"
 
 permissions:
   adminutils.manage:
