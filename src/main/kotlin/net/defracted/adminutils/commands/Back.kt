@@ -26,6 +26,8 @@ class Back(private val plugin: Main) : CommandExecutor {
                     player.teleport(deathLocation)
                     player.sendMessage(Formatters.chat("&6Телепортируем вас на место вашей смерти..."))
                     player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f)
+                    plugin.lastDeathsLocations.remove(player.uniqueId)
+                    player.sendMessage(Formatters.chat("&c&lВНИМАНИЕ! &6Вы больше не сможете вернуться сюда!"))
                 }
             }
             return true

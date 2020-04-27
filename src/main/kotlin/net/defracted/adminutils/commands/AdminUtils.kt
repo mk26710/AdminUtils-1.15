@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender
 class AdminUtils(private val plugin: Main) : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
         // /adminutiles
-        if (cmd.getName().equals("adminutils", ignoreCase = true)) {
+        if (cmd.name.equals("adminutils", ignoreCase = true)) {
             // /adminutils reload
             if (args[0].equals("reload", ignoreCase = true)) {
                 plugin.reloadConfig()

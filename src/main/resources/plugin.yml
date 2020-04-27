@@ -1,5 +1,5 @@
 main: "net.defracted.adminutils.Main"
-version: "1.0.7"
+version: "1.0.8"
 name: "AdminUtils"
 author: "Defracted7"
 api-version: "1.15"
@@ -15,6 +15,11 @@ commands:
     description: "Банит игроков"
     usage: "/ban <игрок> <срок в минутах> <причина>"
     permission: "adminutils.ban"
+
+  mute:
+    description: "Выдаёт муты"
+    usage: "/mute <игрок> <срок в минутах> <причина>"
+    permission: "adminutils.mute"
 
   heal:
     description: "Лечит игрока"
@@ -42,6 +47,10 @@ permissions:
 
   adminutils.ban:
     description: "Доступ к команде /ban"
+    default: op
+
+  adminutils.mute:
+    description: "Доступ к команде /mute"
     default: op
 
   adminutils.heal:
@@ -75,6 +84,7 @@ permissions:
     children:
       adminutils.manage: true
       adminutils.ban: true
+      adminutils.mute: true
       adminutils.heal: true
       adminutils.god: true
       adminutils.back: true

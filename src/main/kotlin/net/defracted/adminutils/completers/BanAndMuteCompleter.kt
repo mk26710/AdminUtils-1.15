@@ -10,7 +10,7 @@ import org.bukkit.util.StringUtil
 import java.util.*
 
 
-class BanCompleter : TabCompleter {
+class BanAndMuteCompleter : TabCompleter {
     override fun onTabComplete(sender: CommandSender, cmd: Command, label: String, args: Array<String?>): List<String> {
         val completions: MutableList<String> = ArrayList()
 
@@ -18,7 +18,7 @@ class BanCompleter : TabCompleter {
             val players: MutableList<String> = ArrayList()
             Bukkit.getServer().onlinePlayers.forEach { p: Player? -> players.add(p!!.name) }
             StringUtil.copyPartialMatches(args[0]!!, players, completions)
-            Collections.sort(completions)
+            completions.sort()
         }
 
         // Возвращается пустой ArrayList, т.к. зависит от ввода игрока

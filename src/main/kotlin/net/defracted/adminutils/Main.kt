@@ -2,13 +2,13 @@ package net.defracted.adminutils
 
 import net.defracted.adminutils.commands.*
 import net.defracted.adminutils.completers.AdminUtilsCompleter
-import net.defracted.adminutils.completers.BanCompleter
+import net.defracted.adminutils.completers.BanAndMuteCompleter
 import net.defracted.adminutils.completers.HealAndGodCompleter
 import net.defracted.adminutils.completers.NoCompletion
 import net.defracted.adminutils.listeners.ChatListener
 import net.defracted.adminutils.listeners.ConnectionListener
 import net.defracted.adminutils.listeners.DamageListener
-import net.defracted.adminutils.mutes.MutedInfo
+import net.defracted.adminutils.mutes.MuteManagement
 
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -24,9 +24,10 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class Main : JavaPlugin() {
+    val muteManager = MuteManagement()
+
     val lastDeathsLocations = HashMap<UUID, Location>()
     val playersInGodMode = ArrayList<UUID>()
-    val mutedPlayers = HashMap<UUID, MutedInfo>()
 
     companion object {
         val logger: Logger = Bukkit.getLogger()
@@ -51,7 +52,8 @@ class Main : JavaPlugin() {
         loadCommand("ping", Ping(), NoCompletion())
         loadCommand("heal", Heal(), HealAndGodCompleter())
         loadCommand("god", God(this), HealAndGodCompleter())
-        loadCommand("ban", Ban(this), BanCompleter())
+        loadCommand("ban", Ban(this), BanAndMuteCompleter())
+        loadCommand("mute", Mute(this), BanAndMuteCompleter())
         loadCommand("adminutils", AdminUtils(this), AdminUtilsCompleter())
         loadCommand("back", Back(this), NoCompletion())
     }

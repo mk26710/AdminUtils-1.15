@@ -16,7 +16,7 @@ class AdminUtilsCompleter : TabCompleter {
         if (args.size == 1) {
             commands.add("reload")
             StringUtil.copyPartialMatches(args[0]!!, commands, completions)
-            Collections.sort(completions)
+            completions.sort()
         }
 
         return completions

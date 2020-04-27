@@ -14,6 +14,8 @@ import java.util.*
 
 
 class ConnectionListener(private val plugin: Main) : Listener {
+    private val appealUrl = plugin.config.getString("appeal_url")
+
     @EventHandler(priority = EventPriority.HIGH)
     fun onPlayerLogin(event: AsyncPlayerPreLoginEvent?) {
         if (event == null) return
@@ -27,6 +29,7 @@ class ConnectionListener(private val plugin: Main) : Listener {
 
             val reason = entry.reason
             val message = chat("&cВаш IP-адрес забанен!\n\n&7Причина: &f$reason")
+
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, message)
             return
         }
@@ -46,7 +49,8 @@ class ConnectionListener(private val plugin: Main) : Listener {
                     chat("&cВы временно забанены!\n\n&7Бан действует до: &f$punishmentDurationStr\n")
                 }
 
-                message += chat("&7Причина: &f$reason\n&7Разбан: &b&n${plugin.config.getString("appeal_url")}")
+                message += chat("&7Причина: &f$reason\n&7Разбан: &b&n${appealUrl}")
+
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, message)
                 return
             }

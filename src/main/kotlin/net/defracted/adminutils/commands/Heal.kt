@@ -12,7 +12,7 @@ import org.bukkit.entity.Player
 
 class Heal : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
-        if (cmd.getName().equals("heal", ignoreCase = true)) {
+        if (cmd.name.equals("heal", ignoreCase = true)) {
             if (sender !is Player) {
                 return true
             }

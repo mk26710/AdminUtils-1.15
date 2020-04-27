@@ -16,7 +16,7 @@ import java.util.*
 class Ban(private val plugin: Main) : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
         if (cmd.name.equals("ban", ignoreCase = true)) {
-            if (args.size <= 0) {
+            if (args.isEmpty()) {
                 sender.sendMessage(Formatters.chat("&cВы не указали ник!"))
                 return true
             }
@@ -31,8 +31,7 @@ class Ban(private val plugin: Main) : CommandExecutor {
             }
 
             // Получаем срок бана (в минутах)
-            val punishmentDuration: Int
-            punishmentDuration = if (Formatters.isStrNum(args[1])) {
+            val punishmentDuration: Int = if (Formatters.isStrNum(args[1])) {
                 args[1].toInt()
             } else {
                 sender.sendMessage(Formatters.chat("&cУкажите срок действия бана в минутах!"))
