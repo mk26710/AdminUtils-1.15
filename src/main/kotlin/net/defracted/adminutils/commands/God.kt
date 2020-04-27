@@ -1,7 +1,8 @@
-package net.Defracted.AdminUtils.commands
+package net.defracted.adminutils.commands
 
-import net.Defracted.AdminUtils.Main
-import net.Defracted.AdminUtils.util.Formatters.chat
+import net.defracted.adminutils.Main
+import net.defracted.adminutils.util.Formatters.chat
+
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

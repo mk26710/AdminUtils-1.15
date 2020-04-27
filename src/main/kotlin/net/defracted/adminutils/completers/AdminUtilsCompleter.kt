@@ -1,9 +1,10 @@
-package net.Defracted.AdminUtils.completers
+package net.defracted.adminutils.completers
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.util.StringUtil
+
 import java.util.*
 
 

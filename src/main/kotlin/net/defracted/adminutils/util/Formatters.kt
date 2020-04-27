@@ -1,4 +1,4 @@
-package net.Defracted.AdminUtils.util
+package net.defracted.adminutils.util
 
 import net.md_5.bungee.api.ChatColor
 

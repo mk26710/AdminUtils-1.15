@@ -1,11 +1,12 @@
-package net.Defracted.AdminUtils.listeners
+package net.defracted.adminutils.listeners
 
-import net.Defracted.AdminUtils.Main
+import net.defracted.adminutils.Main
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.PlayerDeathEvent
 
 
 class DamageListener(private val plugin: Main) : Listener {
@@ -19,4 +20,12 @@ class DamageListener(private val plugin: Main) : Listener {
         }
     }
 
+    @EventHandler
+    fun onDeath(event: PlayerDeathEvent) {
+        val player: Player = event.entity
+
+        if (player.hasPermission("adminutils.back")) {
+            plugin.lastDeathsLocations.put(player.uniqueId, player.location)
+        }
+    }
 }

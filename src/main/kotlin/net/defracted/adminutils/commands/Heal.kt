@@ -1,6 +1,7 @@
-package net.Defracted.AdminUtils.commands
+package net.defracted.adminutils.commands
 
-import net.Defracted.AdminUtils.util.Formatters.chat
+import net.defracted.adminutils.util.Formatters.chat
+
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.command.Command
@@ -17,6 +18,7 @@ class Heal : CommandExecutor {
             }
             val p = sender
             val target: Player?
+
             if (args.size <= 0) {
                 target = p
             } else {
@@ -26,13 +28,17 @@ class Heal : CommandExecutor {
                     return true
                 }
             }
+
             target.health = 20.0
             target.foodLevel = 20
+
             if (target !== p) {
                 p.sendMessage(chat("&eВы вылечили игрока &a" + target.name + "&e."))
             }
+
             target.sendMessage(chat("&eВы исцелены."))
             target.playSound(target.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f)
+
             return true
         }
         return false

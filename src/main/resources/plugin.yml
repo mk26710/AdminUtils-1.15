@@ -1,5 +1,5 @@
-main: "net.Defracted.AdminUtils.Main"
-version: "1.0.6"
+main: "net.defracted.adminutils.Main"
+version: "1.0.7"
 name: "AdminUtils"
 author: "Defracted7"
 api-version: "1.15"
@@ -30,6 +30,11 @@ commands:
     description: "Проверяет задержку"
     usage: "/ping"
 
+  back:
+    description: "Возвращает на место смерти"
+    usage: "/back"
+    permission: "adminutils.back"
+
 permissions:
   adminutils.manage:
     description: "Доступ к команде /adminutils"
@@ -43,9 +48,27 @@ permissions:
     description: "Доступ к команде /heal"
     default: op
 
-  adminutil.god:
-    description: "Доступ к команде /god"
+  adminutil.back:
+    description: "Доступ к команде /back"
     default: op
+
+  adminutils.colored_chat:
+    description: "Даёт доступ к цветным сообщениям"
+    default: false
+
+  # Префиксы, на случай отсутствия LuckPerms
+
+  adminutils.prefix.senior:
+    description: "Префикс старшего модератора"
+    default: false
+
+  adminutils.prefix.mod:
+    description: "Префикс модератора"
+    default: false
+
+  adminutils.prefix.helper:
+    description: "Префикс хэлпера"
+    default: false
 
   adminutils.*:
     description: "Полный доступ ко всем командам плагина AdminUtils"
@@ -54,3 +77,5 @@ permissions:
       adminutils.ban: true
       adminutils.heal: true
       adminutils.god: true
+      adminutils.back: true
+      adminutils.colored_chat: true

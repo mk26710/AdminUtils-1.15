@@ -1,4 +1,4 @@
-package net.Defracted.AdminUtils.completers
+package net.defracted.adminutils.completers
 
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 import org.bukkit.util.StringUtil
+
 import java.util.*
 
 

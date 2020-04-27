@@ -1,6 +1,7 @@
-package net.Defracted.AdminUtils.commands
+package net.defracted.adminutils.commands
 
-import net.Defracted.AdminUtils.util.Formatters
+import net.defracted.adminutils.util.Formatters
+
 import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
