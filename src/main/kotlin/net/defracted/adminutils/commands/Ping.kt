@@ -1,6 +1,6 @@
 package net.defracted.adminutils.commands
 
-import net.defracted.adminutils.util.Formatters
+import net.defracted.adminutils.util.Formatters.chat
 
 import org.bukkit.Sound
 import org.bukkit.command.Command
@@ -17,7 +17,7 @@ class Ping : CommandExecutor {
                 val entityPlayer: Any = player.javaClass.getMethod("getHandle").invoke(player)
                 val ping = entityPlayer.javaClass.getField("ping").get(entityPlayer)
 
-                player.sendMessage(Formatters.chat("&bВаш пинг: $ping мс &7(приблизитльно)"))
+                player.sendMessage(chat("&bВаш пинг: $ping мс &7(приблизитльно)"))
                 player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f)
             }
             return true

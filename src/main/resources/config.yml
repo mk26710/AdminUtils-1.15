@@ -1,4 +1,5 @@
 plugin_prefix: "&fAdminUtils > &r"
 appeal_url: "www.yourdomain.com/appeal"
 broadcast_ban_message: true
-use_luckperms: false
+use_vault: true
+use_custom_chat_listener: true

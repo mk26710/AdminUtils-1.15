@@ -1,7 +1,7 @@
 package net.defracted.adminutils.commands
 
 import net.defracted.adminutils.Main
-import net.defracted.adminutils.util.Formatters
+import net.defracted.adminutils.util.Formatters.chat
 import org.bukkit.Sound
 
 import org.bukkit.command.Command
@@ -16,7 +16,8 @@ class Back(private val plugin: Main) : CommandExecutor {
                 val player: Player = sender
 
                 if (!plugin.lastDeathsLocations.containsKey(player.uniqueId)) {
-                    player.sendMessage(Formatters.chat("&6Локация вашей предыдущей смерти не найдена."))
+                    player.sendMessage(chat("&cЛокация вашей предыдущей смерти не найдена."))
+                    player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 0f)
                     return true
                 }
 
@@ -24,10 +25,10 @@ class Back(private val plugin: Main) : CommandExecutor {
 
                 if (deathLocation != null) {
                     player.teleport(deathLocation)
-                    player.sendMessage(Formatters.chat("&6Телепортируем вас на место вашей смерти..."))
+                    player.sendMessage(chat("&bТелепортируем вас на место вашей смерти..."))
                     player.playSound(player.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f)
                     plugin.lastDeathsLocations.remove(player.uniqueId)
-                    player.sendMessage(Formatters.chat("&c&lВНИМАНИЕ! &6Вы больше не сможете вернуться сюда!"))
+                    player.sendMessage(chat("&c&lВНИМАНИЕ! &bВы больше не сможете вернуться сюда!"))
                 }
             }
             return true

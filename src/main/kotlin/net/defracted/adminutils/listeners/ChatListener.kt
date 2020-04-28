@@ -3,8 +3,6 @@ package net.defracted.adminutils.listeners
 import net.defracted.adminutils.Main
 import net.defracted.adminutils.util.Formatters
 import net.defracted.adminutils.util.Other
-import net.luckperms.api.LuckPerms
-import net.luckperms.api.query.QueryOptions
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -12,12 +10,9 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
 
+
 class ChatListener(private val plugin: Main) : Listener {
-    private val useLp: Boolean = plugin.config.getBoolean("use_luckperms")
-
-    private val provider = Bukkit.getServicesManager().getRegistration(LuckPerms::class.java)
-    private val LuckPermsAPI = provider?.provider
-
+    private val shouldUseVault: Boolean = plugin.config.getBoolean("use_vault")
 
     @EventHandler
     fun onNewMessage(event: AsyncPlayerChatEvent) {
@@ -49,7 +44,7 @@ class ChatListener(private val plugin: Main) : Listener {
 
         if (player.isOp || player.hasPermission("adminutils.colored_chat")) msg = Formatters.chat(event.message)
 
-        if (!useLp) {
+        if (!shouldUseVault) {
             if (player.isOp) {
                 prefix = "&c&lADMIN &r"
             } else if (player.hasPermission("adminutils.prefix.senior")) {
@@ -60,11 +55,11 @@ class ChatListener(private val plugin: Main) : Listener {
                 prefix = "&9&lHELPER &r"
             }
         } else {
-            if (LuckPermsAPI != null) {
-                val luckpermsPrefix = LuckPermsAPI.userManager.getUser(player.uniqueId)?.cachedData?.getMetaData(QueryOptions.nonContextual())?.prefix
+            if (plugin.chat != null) {
+                val vaultPrefix = plugin.chat!!.getPlayerPrefix(player.world.name, player)
 
-                if (luckpermsPrefix != null) {
-                    prefix = luckpermsPrefix
+                if (vaultPrefix != null) {
+                    prefix = vaultPrefix
                 }
             }
         }

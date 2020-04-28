@@ -1,7 +1,8 @@
 package net.defracted.adminutils.commands
 
 import net.defracted.adminutils.Main
-import net.defracted.adminutils.util.Formatters
+import net.defracted.adminutils.util.Formatters.chat
+import net.defracted.adminutils.util.Formatters.isStrNum
 
 import org.bukkit.BanList
 import org.bukkit.Bukkit
@@ -17,7 +18,7 @@ class Ban(private val plugin: Main) : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
         if (cmd.name.equals("ban", ignoreCase = true)) {
             if (args.isEmpty()) {
-                sender.sendMessage(Formatters.chat("&cВы не указали ник!"))
+                sender.sendMessage(chat("&cВы не указали ник!"))
                 return true
             }
 
@@ -26,15 +27,15 @@ class Ban(private val plugin: Main) : CommandExecutor {
 
             // Проверяем наличие длительности
             if (args.size < 2) {
-                sender.sendMessage(Formatters.chat("&cВы не указали длительность бана."))
+                sender.sendMessage(chat("&cВы не указали длительность бана."))
                 return true
             }
 
             // Получаем срок бана (в минутах)
-            val punishmentDuration: Int = if (Formatters.isStrNum(args[1])) {
+            val punishmentDuration: Int = if (isStrNum(args[1])) {
                 args[1].toInt()
             } else {
-                sender.sendMessage(Formatters.chat("&cУкажите срок действия бана в минутах!"))
+                sender.sendMessage(chat("&cУкажите срок действия бана в минутах!"))
                 return true
             }
 
@@ -67,13 +68,13 @@ class Ban(private val plugin: Main) : CommandExecutor {
             Bukkit.getBanList(BanList.Type.NAME).addBan(target, reason, punishmentDateExpiration, sender.name)
 
             // Кикаем игрока, если он в онлайне
-            playerTarget?.kickPlayer(Formatters.chat("&cВы были забанены!\n\n&fПереподключитесь, чтобы узнать подробности."))
+            playerTarget?.kickPlayer(chat("&cВы были забанены!\n\n&fПереподключитесь, чтобы узнать подробности."))
 
             // Информируем модератора
-            sender.sendMessage(Formatters.chat("&aИгрок &f$target&a забанен $infoExpiration &aпо причине: &f$reason"))
+            sender.sendMessage(chat("&aИгрок &f$target&a забанен $infoExpiration &aпо причине: &f$reason"))
 
             // Информируем всех игроков
-            if (plugin.config.getBoolean("broadcast_ban_message")) Bukkit.broadcastMessage(Formatters.chat("""
+            if (plugin.config.getBoolean("broadcast_ban_message")) Bukkit.broadcastMessage(chat("""
     &c&lОдин из игроков был удалён из игры за использование читов или другие нарушения. 
     &bБлагодарим вас за жалобы!
     """.trimIndent()))

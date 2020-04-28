@@ -19,9 +19,15 @@ class Heal : CommandExecutor {
             val p = sender
             val target: Player?
 
-            if (args.size <= 0) {
+            if (args.isEmpty()) {
                 target = p
             } else {
+                if (!p.hasPermission("adminutils.heal.others")) {
+                    p.sendMessage(chat("&cВы не можете исцелять других игроков!"))
+                    p.playSound(p.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 0f)
+                    return true
+                }
+
                 target = Bukkit.getPlayerExact(args[0])
                 if (target == null) {
                     p.sendMessage(chat("&eИгрок &c" + args[0] + " &eне найден."))

@@ -1,5 +1,5 @@
 main: "net.defracted.adminutils.Main"
-version: "1.0.9"
+version: "1.1.0"
 name: "AdminUtils"
 author: "Defracted7"
 api-version: "1.15"
@@ -28,13 +28,18 @@ commands:
 
   heal:
     description: "Лечит игрока"
-    usage: "/heal <игрок>"
+    usage: "/heal [игрок]"
     permission: "adminutils.heal"
 
   god:
     description: "Включает неуюзвимость"
     usage: "/god <игрок>"
     permission: "adminutils.god"
+
+  fly:
+    description: "Включает режим полёта"
+    usage: "/fly [игрок]"
+    permission: "adminutils.fly"
 
   ping:
     description: "Проверяет задержку"
@@ -45,17 +50,19 @@ commands:
     usage: "/back"
     permission: "adminutils.back"
 
+# Права
+
 permissions:
   adminutils.manage:
-    description: "Доступ к команде /adminutils"
+    description: "Возможность использовать /adminutils"
     default: op
 
   adminutils.ban:
-    description: "Доступ к команде /ban"
+    description: "Возможность использовать /ban"
     default: op
 
   adminutils.mute:
-    description: "Доступ к команде /mute и /unmute"
+    description: "Возможность использовать /mute и /unmute"
     default: op
 
   adminutils.mute.bypass:
@@ -63,10 +70,30 @@ permissions:
     default: false
 
   adminutils.heal:
-    description: "Доступ к команде /heal"
+    description: "Возможность использовать /heal"
     default: op
 
-  adminutil.back:
+  adminutils.heal.others:
+    description: "Возможность использовать /heal на других игроках"
+    default: op
+
+  adminutils.god:
+    description: "Возможность использовать /god"
+    default: op
+
+  adminutils.god.others:
+    description: "Возможность использовать /god на других игроках"
+    default: op
+
+  adminutils.fly:
+    description: "Возможность использовать /fly"
+    default: op
+
+  adminutils.fly.others:
+    description: "Возможность использовать /fly на других игроках"
+    default: op
+
+  adminutils.back:
     description: "Доступ к команде /back"
     default: op
 
@@ -97,6 +124,10 @@ permissions:
       adminutils.mute: true
       adminutils.mute.bypass: true
       adminutils.heal: true
+      adminutils.heal.others: true
       adminutils.god: true
+      adminutils.god.others: true
+      adminutils.fly: true
+      adminutils.fly.others: true
       adminutils.back: true
       adminutils.colored_chat: true

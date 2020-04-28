@@ -14,7 +14,7 @@ class DamageListener(private val plugin: Main) : Listener {
     fun onHit(event: EntityDamageEvent) {
         if (event.entity is Player) {
             val player = event.entity as Player
-            if (plugin.playersInGodMode.contains(player.uniqueId)) {
+            if (plugin.godModePlayers.contains(player.uniqueId)) {
                 event.isCancelled = true
             }
         }
@@ -25,7 +25,7 @@ class DamageListener(private val plugin: Main) : Listener {
         val player: Player = event.entity
 
         if (player.hasPermission("adminutils.back")) {
-            plugin.lastDeathsLocations.put(player.uniqueId, player.location)
+            plugin.lastDeathsLocations[player.uniqueId] = player.location
         }
     }
 }

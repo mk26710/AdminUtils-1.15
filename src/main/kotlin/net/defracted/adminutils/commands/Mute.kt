@@ -1,7 +1,8 @@
 package net.defracted.adminutils.commands
 
 import net.defracted.adminutils.Main
-import net.defracted.adminutils.util.Formatters
+import net.defracted.adminutils.util.Formatters.chat
+import net.defracted.adminutils.util.Formatters.isStrNum
 import net.defracted.adminutils.util.Other
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -13,12 +14,12 @@ class Mute(private val plugin: Main) : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (cmd.name.equals("mute", ignoreCase = true)) {
             if (args.isEmpty()) {
-                sender.sendMessage(Formatters.chat("&cВы не указали цель."))
+                sender.sendMessage(chat("&cВы не указали цель."))
                 return true
             }
 
             if (args.size < 2) {
-                sender.sendMessage(Formatters.chat("&cВы не указали длительность мута."))
+                sender.sendMessage(chat("&cВы не указали длительность мута."))
                 return true
             }
 
@@ -26,15 +27,15 @@ class Mute(private val plugin: Main) : CommandExecutor {
             val target = Bukkit.getPlayerExact(args[0])
 
             if (target == null) {
-                sender.sendMessage(Formatters.chat("&cИгрок &a${args[0]} &cне найден."))
+                sender.sendMessage(chat("&cИгрок &a${args[0]} &cне найден."))
                 return true
             }
 
             // Длительность мута
-            val duration: Int = if (Formatters.isStrNum(args[1])) {
+            val duration: Int = if (isStrNum(args[1])) {
                 args[1].toInt()
             } else {
-                sender.sendMessage(Formatters.chat("&cУкажите срок действия бана в минутах!"))
+                sender.sendMessage(chat("&cУкажите срок действия бана в минутах!"))
                 return true
             }
 
@@ -58,8 +59,8 @@ class Mute(private val plugin: Main) : CommandExecutor {
             val diff = Other.timeDiff(expireMuteAt, System.currentTimeMillis())
             val diffStr = "${diff["days"]} дн. ${diff["hours"]} ч. ${diff["minutes"]} мин. ${diff["seconds"]} сек."
 
-            sender.sendMessage(Formatters.chat("&aИгроку &f${target.name} &aвыдан мут на &f$diffStr &aс причиной: &f$reason"))
-            target.sendMessage(Formatters.chat("&f${sender.name} &e> &cВам выдан мут на &f$diffStr &cпо причине &f$reason"))
+            sender.sendMessage(chat("&aИгроку &f${target.name} &aвыдан мут на &f$diffStr &aс причиной: &f$reason"))
+            target.sendMessage(chat("&f${sender.name} &e> &cВам выдан мут на &f$diffStr &cпо причине &f$reason"))
             return true
         }
 
