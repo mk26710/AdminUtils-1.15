@@ -1,14 +1,17 @@
 package net.defracted.adminutils.listeners
 
 import net.defracted.adminutils.Main
+import net.defracted.adminutils.util.Formatters
 import net.defracted.adminutils.util.Formatters.chat
 
 import org.bukkit.BanList
 import org.bukkit.Bukkit
+import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
+import org.bukkit.event.player.PlayerJoinEvent
 
 import java.util.*
 
@@ -54,6 +57,16 @@ class ConnectionListener(private val plugin: Main) : Listener {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, message)
                 return
             }
+        }
+    }
+
+    @EventHandler
+    fun onPlayerJoin(event: PlayerJoinEvent) {
+        val player = event.player
+
+        if (player.hasPermission("adminutils.manage")) {
+            Bukkit.getOnlinePlayers().forEach { p -> p.playSound(p.location, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, 1f) }
+            event.joinMessage = Formatters.chat("&c&l${player.displayName} &bприсоединился к игре.")
         }
     }
 }

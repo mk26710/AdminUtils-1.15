@@ -3,7 +3,7 @@ package net.defracted.adminutils
 import net.defracted.adminutils.commands.*
 import net.defracted.adminutils.completers.AdminUtilsCompleter
 import net.defracted.adminutils.completers.BanAndMuteCompleter
-import net.defracted.adminutils.completers.HealAndGodCompleter
+import net.defracted.adminutils.completers.PlayerNameTarget
 import net.defracted.adminutils.completers.NoCompletion
 import net.defracted.adminutils.listeners.ChatListener
 import net.defracted.adminutils.listeners.ConnectionListener
@@ -45,17 +45,21 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         saveDefaultConfig()
 
+        loadCommand("ping", Ping(), NoCompletion())
+
+        loadCommand("back", Back(this), NoCompletion())
+        loadCommand("heal", Heal(), PlayerNameTarget())
+        loadCommand("god", God(this), PlayerNameTarget())
+
+        loadCommand("ban", Ban(this), BanAndMuteCompleter())
+        loadCommand("mute", Mute(this), BanAndMuteCompleter())
+        loadCommand("unmute", Unmute(this), PlayerNameTarget())
+
+        loadCommand("adminutils", AdminUtils(this), AdminUtilsCompleter())
+
         loadListener(ConnectionListener(this))
         loadListener(DamageListener(this))
         loadListener(ChatListener(this))
-
-        loadCommand("ping", Ping(), NoCompletion())
-        loadCommand("heal", Heal(), HealAndGodCompleter())
-        loadCommand("god", God(this), HealAndGodCompleter())
-        loadCommand("ban", Ban(this), BanAndMuteCompleter())
-        loadCommand("mute", Mute(this), BanAndMuteCompleter())
-        loadCommand("adminutils", AdminUtils(this), AdminUtilsCompleter())
-        loadCommand("back", Back(this), NoCompletion())
     }
 
     override fun onDisable() {

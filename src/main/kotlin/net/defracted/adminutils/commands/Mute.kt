@@ -2,11 +2,12 @@ package net.defracted.adminutils.commands
 
 import net.defracted.adminutils.Main
 import net.defracted.adminutils.util.Formatters
+import net.defracted.adminutils.util.Other
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import java.util.*
+
 
 class Mute(private val plugin: Main) : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
@@ -45,14 +46,20 @@ class Mute(private val plugin: Main) : CommandExecutor {
                 for (i in 2 until args.size) reason += args[i] + if (i != args.size - 1) " " else ""
             }
 
+            // Получаем текущий момент времени
+            val now = System.currentTimeMillis()
             // Формируем временную метку, когда мут будет снят
-            val expireMuteAt = System.currentTimeMillis() + duration * 60000
-            val expiresMuteAtDate = Date(expireMuteAt).toString()
+            val expireMuteAt = now + duration * 60000
 
             // Формируем информацию о муте и выдаём его
             plugin.muteManager.addMute(target.uniqueId, sender.name, reason, expireMuteAt)
 
-            sender.sendMessage(Formatters.chat("&aУспешно выдан мут игроку &f${target.name} &aдо &f${expiresMuteAtDate} &aс причиной: &f$reason"))
+            // Получаем разницу во времени
+            val diff = Other.timeDiff(expireMuteAt, System.currentTimeMillis())
+            val diffStr = "${diff["days"]} дн. ${diff["hours"]} ч. ${diff["minutes"]} мин. ${diff["seconds"]} сек."
+
+            sender.sendMessage(Formatters.chat("&aИгроку &f${target.name} &aвыдан мут на &f$diffStr &aс причиной: &f$reason"))
+            target.sendMessage(Formatters.chat("&f${sender.name} &e> &cВам выдан мут на &f$diffStr &cпо причине &f$reason"))
             return true
         }
 

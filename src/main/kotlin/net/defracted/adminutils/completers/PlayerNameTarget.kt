@@ -10,7 +10,7 @@ import org.bukkit.util.StringUtil
 import java.util.*
 
 
-class HealAndGodCompleter : TabCompleter {
+class PlayerNameTarget : TabCompleter {
     override fun onTabComplete(sender: CommandSender, cmd: Command, label: String, args: Array<String?>): List<String> {
         val completions: MutableList<String> = ArrayList()
 
