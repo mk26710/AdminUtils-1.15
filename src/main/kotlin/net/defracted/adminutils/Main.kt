@@ -3,23 +3,20 @@ package net.defracted.adminutils
 import net.defracted.adminutils.commands.*
 import net.defracted.adminutils.completers.AdminUtilsCompleter
 import net.defracted.adminutils.completers.BanAndMuteCompleter
-import net.defracted.adminutils.completers.PlayerNameTarget
 import net.defracted.adminutils.completers.NoCompletion
+import net.defracted.adminutils.completers.PlayerNameTarget
 import net.defracted.adminutils.listeners.ChatListener
 import net.defracted.adminutils.listeners.ConnectionListener
 import net.defracted.adminutils.listeners.DamageListener
 import net.defracted.adminutils.mutes.MuteManagement
-
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.TabCompleter
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
-
 import java.util.*
 import java.util.logging.Logger
-
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
