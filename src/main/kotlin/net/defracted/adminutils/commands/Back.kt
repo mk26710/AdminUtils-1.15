@@ -21,7 +21,7 @@ class Back(private val plugin: Main) : CommandExecutor {
                     return true
                 }
 
-                val deathLocation = plugin.lastDeathsLocations.get(player.uniqueId)
+                val deathLocation = plugin.lastDeathsLocations[player.uniqueId]
 
                 if (deathLocation != null) {
                     player.teleport(deathLocation)

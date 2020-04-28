@@ -21,6 +21,11 @@ import java.util.logging.Logger
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
+/**
+ * Project: AdminUtils
+ * @author defracted
+ */
+
 class Main : JavaPlugin() {
     var chat: Chat? = null
     val muteManager = MuteManagement()
