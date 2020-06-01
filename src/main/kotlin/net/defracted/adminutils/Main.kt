@@ -6,6 +6,7 @@ import net.defracted.adminutils.completers.BanAndMuteCompleter
 import net.defracted.adminutils.completers.NoCompletion
 import net.defracted.adminutils.completers.PlayerNameTarget
 import net.defracted.adminutils.listeners.ChatListener
+import net.defracted.adminutils.listeners.ChatSender
 import net.defracted.adminutils.listeners.ConnectionListener
 import net.defracted.adminutils.listeners.DamageListener
 import net.defracted.adminutils.mutes.MuteManagement
@@ -34,6 +35,9 @@ class Main : JavaPlugin() {
     val godModePlayers = HashSet<UUID>()
     val flyingPlayers = HashSet<UUID>()
 
+    val isSenderEnabled: Boolean = this.config.getBoolean("use_custom_chat_listener")
+    val isVaultEnabled: Boolean = this.config.getBoolean("use_vault")
+
     companion object {
         val logger: Logger = Bukkit.getLogger()
     }
@@ -41,7 +45,7 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         saveDefaultConfig()
 
-        if (this.config.getBoolean("use_vault")) setupChat()
+        if (isVaultEnabled && isSenderEnabled) setupChat()
 
         loadCommand("ping", Ping(), NoCompletion())
 
@@ -59,6 +63,7 @@ class Main : JavaPlugin() {
         loadListener(ConnectionListener(this))
         loadListener(DamageListener(this))
         loadListener(ChatListener(this))
+        if (isSenderEnabled) loadListener(ChatSender(this))
     }
 
     override fun onDisable() {
